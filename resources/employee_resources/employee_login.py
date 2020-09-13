@@ -20,7 +20,7 @@ class EmployeeAccountResource(Resource):
             if data['passcode'] == employee.passcode:
                 return {'EmployeeID': employee.employee_ID}
             else:
-                return {'Message': 'False'}
+                return {'Message': 'Incorrect password'}
 
     def put(self, email):
         employee = EmployeeModel.find_by_email(email=email)
