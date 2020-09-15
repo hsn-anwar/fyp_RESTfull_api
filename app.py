@@ -8,6 +8,9 @@ from resources.attendance import AttendanceResource, AttendanceList
 
 from resources.parent_resources.parent_resource import ParentResource
 from resources.parent_resources.parent_account_resource import ParentAcccountResource
+from resources.parent_resources.password_resource import PasswordResource
+from resources.child.child_resource import ChildResource, ChildList
+
 
 
 app = Flask(__name__)
@@ -25,6 +28,11 @@ api.add_resource(AttendanceList, '/attendance_list')
 api.add_resource(ParentResource, '/parent')
 
 api.add_resource(ParentAcccountResource, '/parent_account/<string:email>')
+
+api.add_resource(PasswordResource, '/parent_account/password/<string:email>')
+
+api.add_resource(ChildResource, '/child/<int:id>')
+api.add_resource(ChildList, '/childlist/<int:fid>')
 
 if __name__ == '__main__':
     from db import db

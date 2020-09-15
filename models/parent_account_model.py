@@ -43,6 +43,17 @@ class ParentAccountModel(db.Model):
     def find_by_fid(cls, _id):
         return cls.find_by_id(_id=_id)
 
+    @classmethod
+    def find_by_fcnic(cls, cnic):
+        return ParentModel.find_by_father_cnic()
+
+    @classmethod
+    def find_by_mcnic(cls, cnic):
+        return ParentModel.find_by_mother_cnic()
+
+    def update_to_db(self):
+        db.session.commit()
+
     def save_to_db(self):
         db.session.add(self)
         db.session.commit()
