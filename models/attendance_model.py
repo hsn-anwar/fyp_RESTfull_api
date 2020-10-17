@@ -1,6 +1,7 @@
 from datetime import datetime
 from models.employee_model import EmployeeModel
 from db import db
+import datetime
 
 
 # noinspection PyMethodMayBeStatic
@@ -15,6 +16,7 @@ class AttendanceModel(db.Model):
     def __init__(self, employee_ID):
         self.employee_ID = employee_ID
 
+
     def json(self):
         print(self.attendance_ID, self.attendance_time, self.attendance_date, self.employee_ID)
         return \
@@ -26,8 +28,8 @@ class AttendanceModel(db.Model):
             }
 
     def date_time(self):
-        self.attendance_date = datetime.now().date()
-        self.attendance_time = datetime.now().time()
+        self.attendance_date = datetime.datetime.today().date()
+        self.attendance_time = datetime.datetime.today().time()
 
     @classmethod
     def find_by_id(cls, _id):

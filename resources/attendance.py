@@ -9,7 +9,7 @@ class AttendanceResource(Resource):
 
     def get(self, _id):
         atten = AttendanceModel.find_by_id(_id=_id)
-        if atten:
+        if atten: 
             return atten.json(), 200
         else:
             return {'Message': 'ID not found'}, 400

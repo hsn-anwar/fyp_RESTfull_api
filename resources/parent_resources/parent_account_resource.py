@@ -21,6 +21,7 @@ class ParentAcccountResource(Resource):
 
         if ParentAccountModel.find_by_f_email(email):
             acc = ParentAccountModel.find_by_f_email(email)
+
             if data['password'] == acc.f_password:
                 parents = ParentModel.find_by_id(acc.parent_id)
                 parents_info = parents.json()

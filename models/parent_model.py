@@ -10,13 +10,12 @@ class ParentModel(db.Model):
     father_first_name = db.Column(db.String(35))
     father_last_name = db.Column(db.String(35))
     father_CNIC = db.Column(db.String(15))
-    father_mobile = db.Column(db.INTEGER)
+    father_mobile = db.Column(db.String(11))
     father_address = db.Column(db.String(100))
-
     mother_first_name = db.Column(db.String(35))
     mother_last_name = db.Column(db.String(35))
     mother_CNIC = db.Column(db.String(15))
-    mother_mobile = db.Column(db.INTEGER)
+    mother_mobile = db.Column(db.String(11))
     mother_address = db.Column(db.String(100))
 
     parent_id = db.relationship('ParentAccountModel', backref='parentid')

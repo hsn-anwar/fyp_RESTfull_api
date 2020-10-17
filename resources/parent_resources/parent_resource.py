@@ -4,13 +4,12 @@ from models.parent_model import ParentModel
 
 
 # noinspection PyMethodMayBeStatic
-class ParentResource(Resource):
+class ParentResource(Resource, ):
     parser = reqparse.RequestParser()
 
     parser.add_argument('cnic', type=str, help='CNIC not found')
-    parser.add_argument('mobile', type=int, help='mobile not found')
+    parser.add_argument('mobile', type=str, help='mobile not found')
     parser.add_argument('address', type=str, help='address not found')
-
 
     def get(self):
         data = self.parser.parse_args()
@@ -33,13 +32,16 @@ class ParentResource(Resource):
 
             if data['mobile'] != 'null':
                 acc.father_mobile = data['mobile']
+                print(data['mobile'])
+                print(acc.father_mobile)
                 acc.update_db()
 
             if data['address'] != 'null':
                 acc.father_address = data['address']
                 acc.update_db()
 
-            return {'Message': "ContactInfo and/or address sucessfully updated", 'mobile': acc.father_mobile, "address": acc.father_address}
+            return {'Message': "ContactInfo and/or address sucessfully updated", 'mobile': acc.father_mobile, "address":
+                acc.father_address}
 
         elif ParentModel.find_by_mother_cnic(cnic):
             acc = ParentModel.find_by_mother_cnic(cnic)
@@ -53,8 +55,8 @@ class ParentResource(Resource):
                 acc.mother_address = data['address']
                 acc.update_db()
 
-            return {'Message': "ContactInfo and/or address sucessfully updated", "mobile": acc.mother_mobile, "address": acc.mother_address}
+            return {'Message': "ContactInfo and/or address sucessfully updated", "mobile": acc.mother_mobile,
+                    "address": acc.mother_address}
 
         else:
             return {'Message': "ERROR"}
-

@@ -12,17 +12,19 @@ class EmployeeAccountResource(Resource):
     parser.add_argument('new_password', type=str)
 
     def post(self, email):
-        employee = EmployeeModel.find_by_email(email=email)
+        # Login Employee
+        employee = EmployeeModel.find_by_email(email=email.strip())
         if not employee:
             return {"Message": "User with email '{}' does not exist".format(email)}, 400
         else:
             data = self.parser.parse_args()
-            if data['passcode'] == employee.passcode:
-                return {'EmployeeID': employee.employee_ID}
+            if data['passcode'].strip() == employee.passcode:
+                return employee.json()
             else:
                 return {'Message': 'Incorrect password'}
 
     def put(self, email):
+        #  Chagne email or password
         employee = EmployeeModel.find_by_email(email=email)
         if not employee:
             return {"Message": "User with email '{}' does not exist".format(email)}, 400
