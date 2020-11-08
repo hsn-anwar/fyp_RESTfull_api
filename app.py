@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_restful import Api
+import socket
 
 from resources.employee_resources.employee import EmployeeResource
 from resources.employee_resources.employee_login import EmployeeAccountResource
@@ -16,11 +17,11 @@ from resources.location_resources.location_resource import LocationsResource
 from resources.location_resources.office_location_resource import OfficeLocationsResource
 
 from resources.vaccine_resources.vaccine_name_resource import VaccineNameList
-from resources.vaccine_resources.vaccine_record_resource import VaccinrRecordResource
+from resources.vaccine_resources.vaccine_record_resource import VaccineRecordResource
 
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root123@localhost/online_vrs'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://root:root@localhost/online_vrs'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.secret_key = 'hellothere'
 api = Api(app)
@@ -46,13 +47,16 @@ api.add_resource(OfficeLocationsResource, '/office_location/<int:fid>')
 
 api.add_resource(VaccineNameList, '/vaccine_list')
 
-api.add_resource(VaccinrRecordResource, '/vaccine_records')
+api.add_resource(VaccineRecordResource, '/vaccine_records/<int:fid>')
 
 api.add_resource(ChildToken, '/child_token')
 
 if __name__ == '__main__':
     from db import db
 
+    hostname = socket.gethostname()
+    ip_address = socket.gethostbyname(hostname)
+
     db.init_app(app)
-    app.run(host='192.168.1.4', port=5000, debug=True)
+    app.run(host=str(ip_address), port=5000, debug=True)
     # app.run(host='192.168.1.184', port=5000, debug=True)

@@ -7,7 +7,7 @@ class LocationsModel(db.Model):
     __tablename__ = 'Locations'
 
     locations_ID = db.Column(db.INTEGER, primary_key=True)
-    location = db.Column(db.String(1000))
+    location = db.Column(db.String(500))
     employee_ID = db.Column(db.INTEGER, db.ForeignKey('Employee.employee_ID'))
 
     def __init__(self, location, employee_ID):
