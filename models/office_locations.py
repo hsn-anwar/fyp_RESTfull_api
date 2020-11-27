@@ -7,8 +7,8 @@ class OfficeLocationModel(db.Model):
 
     office_ID = db.Column(db.INTEGER, primary_key=True)
     address = db.Column(db.String(1000))
-    latitude = db.Column(db.Float)
-    longitude = db.Column(db.Float)
+    latitude = db.Column(db.String(20))
+    longitude = db.Column(db.String(20))
 
     emp = db.relationship('EmployeeModel', backref='emp_model')
 
@@ -16,8 +16,8 @@ class OfficeLocationModel(db.Model):
         return \
             {
                 'address': self.address,
-                'lat': self.latitude,
-                'long': self.longitude
+                'lat': float(self.latitude),
+                'long': float(self.longitude)
             }
 
     @classmethod

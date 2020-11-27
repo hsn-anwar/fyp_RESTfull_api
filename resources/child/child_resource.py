@@ -49,8 +49,9 @@ class ChildToken(Resource):
     def put(self):
         data = self.parser.parse_args()
         child_id = data['id']
+        print(child_id)
         token = ''.join(secrets.choice(string.ascii_uppercase + string.digits) for _ in range(10))
-        print(token)
+        print("Created: ", token)
         child = ChildModel.find_by_id(child_id)
 
         if child:
@@ -62,6 +63,7 @@ class ChildToken(Resource):
         data = self.parser.parse_args()
         token = data['token']
         # return cls.query.filter_by(child_id=id).first()
+        print("Recieved: ", token)
         child = ChildModel.query.filter_by(Token=token).first()
         if child:
             child.Token = None
