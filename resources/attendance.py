@@ -9,8 +9,9 @@ class AttendanceResource(Resource):
 
     def get(self, _id):
         atten = AttendanceModel.find_by_id(_id=_id)
-        if atten: 
-            return atten.json(), 200
+        if atten:
+            return {'Attendance': [child.json() for child in AttendanceModel.query.filter_by(employee_ID=_id).all()]}
+
         else:
             return {'Message': 'ID not found'}, 400
 
