@@ -13,7 +13,7 @@ class VaccineRecordResource(Resource):
     parser.add_argument('vac_name', type=str, help='Vaccine name not found')
     parser.add_argument('child_id', type=int, help='Child ID not found')
     parser.add_argument('emp_id', type=int, help='Employee ID not found')
-    parser.add_argument('dor', type=int, help='Date of readministration')
+    parser.add_argument('dor', type=str, help='Date of readministration')
 
     def get(self, fid):
 
@@ -34,10 +34,12 @@ class VaccineRecordResource(Resource):
         dor = data['dor']
 
         if ChildModel.find_by_id(id=child_id):
+            print(dor)
             datetimestamp = datetime.datetime.now()
             doa = datetimestamp.date()
             toa = datetimestamp.time()
             vac = VaccineRecordModel(vac_name=vac_name, doa=doa, toa=toa, emp_id=emp_id, child_id=child_id, dor=dor)
+            print(vac.date_of_administration)
             vac.update_db()
             vac.save_to_db()
             return {'Message': 'Database updated'}, 200

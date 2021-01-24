@@ -25,10 +25,10 @@ class VaccineRecordModel(db.Model, ModelTemplate):
 
     def json(self):
         return {'vaccine': self.vaccine_name, 'doa': str(self.reverse_doa()), 'toa': str(self.time_of_administration),
-                'dor': str(self.readministration_date)}
+                'dor':  str(self.readministration_date)}
 
     def reverse_doa(self):
-        return datetime.datetime.strptime(str(self.date_of_administration), "%Y-%m-%d").strftime("%d-%m-%Y")
+        return datetime.datetime.strptime(str(self.date_of_administration), "%Y-%m-%d").strftime("%d/%m/%Y")
 
-    def reverse_dor(self, dor):
-        return datetime.datetime.strptime(str(self.readministration_date), "%Y%m%d").strftime("%d%m%Y")
+    def reverse_dor(self):
+        return datetime.datetime.strptime(str(self.readministration_date), "%Y-%m-%d").strftime("%d/%m/%Y")

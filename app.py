@@ -58,5 +58,6 @@ if __name__ == '__main__':
     ip_address = socket.gethostbyname(hostname)
 
     db.init_app(app)
+    print(str(ip_address))
     app.run(host=str(ip_address), port=5000, debug=True)
     # app.run(host='192.168.1.184', port=5000, debug=True)

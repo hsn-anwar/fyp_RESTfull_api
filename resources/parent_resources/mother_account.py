@@ -2,7 +2,7 @@ from flask_restful import Resource, reqparse
 
 from models.parent_account_model import ParentAccountModel
 
-
+z
 # noinspection PyMethodMayBeStatic
 class MotherAcccountResource(Resource):
     parser = reqparse.RequestParser()
